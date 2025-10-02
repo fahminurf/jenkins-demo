@@ -29,7 +29,7 @@ pipeline {
 
    post {
 	success{
-		archiveArtifacts: 'deploy-demo.tar.gz', fingerprint: true
+		archiveArtifacts artifacts: 'deploy-demo.tar.gz', fingerprint: true
 		sh 'echo "berhasil, berhasil hore, hore"'
 	}
 	failure{
