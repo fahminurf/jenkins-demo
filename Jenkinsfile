@@ -25,7 +25,7 @@ pipeline {
                 sh 'echo "Stage Deploy  : Simpan Hasil ke Workspace "'
 		sh 'mkdir -p deploy-demo'
 		sh 'cp script.sh deploy-demo/'
-		sh 'tar -czf deploy-demo-${BUILD_NUMBER}.tar.gz deploy-demo/'
+		sh "tar -czf deploy-demo-${BUILD_NUMBER}.tar.gz deploy-demo/"
             }
         }
     }
@@ -35,7 +35,7 @@ pipeline {
 		archiveArtifacts artifacts: 'report.html', fingerprint:true
 	}
 	success{
-		archiveArtifacts artifacts: 'deploy-demo-${BUILD_NUMBER}.tar.gz', fingerprint: true
+		archiveArtifacts artifacts: "deploy-demo-${BUILD_NUMBER}.tar.gz", fingerprint: true
 		sh 'echo "berhasil, berhasil hore, hore"'
 	}
 	failure{
