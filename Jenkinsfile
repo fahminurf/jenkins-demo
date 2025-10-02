@@ -12,14 +12,26 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'echo "Stage Test "'
+                sh 'echo "Stage Test : menjalankan unit test"'
+		sh 'echo "Test Selesai"'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo "Stage Deploy  (simulasi)"'
+                sh 'echo "Stage Deploy  : Simpan Hasil ke Workspace "'
+		sh 'mkdir -p deploy-demo'
+		sh 'cp script.sh deploy-demo/'
             }
         }
     }
+
+   post {
+	success{
+		sh 'echo "berhasil, berhasil hore, hore"'
+	}
+	failure{
+		sh 'echo "gagal maning sonnnn, cek log"'
+	}
+   }
 }
