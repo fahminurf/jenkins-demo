@@ -25,14 +25,14 @@ pipeline {
                 sh 'echo "Stage Deploy  : Simpan Hasil ke Workspace "'
 		sh 'mkdir -p deploy-demo'
 		sh 'cp script.sh deploy-demo/'
-		sh 'tar -czf deploy-demo.tar.gz deploy-demo/'
+		sh 'tar -czf deploy-demo-$(date +%Y%m%d-%H%M%S).tar.gz deploy-demo/'
             }
         }
     }
 
    post {
 	success{
-		archiveArtifacts artifacts: 'deploy-demo.tar.gz', fingerprint: true
+		archiveArtifacts artifacts: 'deploy-demo-*.tar.gz', fingerprint: true
 		sh 'echo "berhasil, berhasil hore, hore"'
 	}
 	failure{
