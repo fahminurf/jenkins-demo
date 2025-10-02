@@ -15,7 +15,7 @@ pipeline {
                 sh 'echo "Stage Test : coba menjalankan pytest"'
 		sh 'python3 -m venv venv'
 		sh '. venv/bin/activate && pip install -r requirements.txt'
-		sh '. venv/bin/activate && pytest -v'
+		sh '. venv/bin/activate && pytest -v --html=report.html --self-contained-html || true'
 		sh 'echo "Test Selesai"'
             }
         }
@@ -31,6 +31,9 @@ pipeline {
     }
 
    post {
+	always {
+		archiveArtifacts artifacts: 'report.html', fingerprint:true
+	}
 	success{
 		archiveArtifacts artifacts: 'deploy-demo-*.tar.gz', fingerprint: true
 		sh 'echo "berhasil, berhasil hore, hore"'
