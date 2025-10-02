@@ -12,7 +12,10 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'echo "Stage Test : menjalankan unit test"'
+                sh 'echo "Stage Test : menjalankan pytest"'
+		sh 'python3 -m venv venv'
+		sh '. venv/bin/activate && pip install -r requirements.txt'
+		sh '. venv/bin/activate && pytest -v'
 		sh 'echo "Test Selesai"'
             }
         }
